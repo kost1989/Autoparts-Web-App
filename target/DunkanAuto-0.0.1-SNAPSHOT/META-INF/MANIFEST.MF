@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Created-By: IntelliJ IDEA
+Built-By: kostyukov_ik
+Build-Jdk: version 11.0.10
+Implementation-Title: DunkanAuto
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: ru.auto.dunkan
+Main-Class: ${start-class}
+
