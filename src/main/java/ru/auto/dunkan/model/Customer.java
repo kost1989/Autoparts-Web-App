@@ -1,4 +1,4 @@
-package ru.auto.dunkan.entity;
+package ru.auto.dunkan.model;
 
 import lombok.Data;
 
@@ -21,7 +21,7 @@ public class Customer {
     @Column(name = "customer_extra")
     private int extra;
 
-    @Column(name = "customer_phoe")
+    @Column(name = "customer_phone")
     private String phone;
 
     @OneToMany(mappedBy = "customer")

@@ -1,4 +1,4 @@
-package ru.auto.dunkan.entity;
+package ru.auto.dunkan.model;
 
 import lombok.Data;
 

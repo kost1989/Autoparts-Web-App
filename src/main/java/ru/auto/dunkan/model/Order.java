@@ -1,4 +1,4 @@
-package ru.auto.dunkan.entity;
+package ru.auto.dunkan.model;
 
 import lombok.Data;
 
@@ -15,7 +15,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "customer_name")
+    @Column(name = "order_name")
     private String name;
 
     @ManyToOne

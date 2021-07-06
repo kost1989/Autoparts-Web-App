@@ -1,16 +1,27 @@
 package ru.auto.dunkan.service;
 
-import ru.auto.dunkan.entity.Status;
+import org.springframework.stereotype.Service;
+import ru.auto.dunkan.model.Status;
+import ru.auto.dunkan.repo.StatusRepository;
 
-import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
-public interface StatusService {
+@Service("statusService")
+public class StatusService {
 
-    Status getById(Long id);
+    private EntityManager em;
 
-    void save(Status status);
+    @PersistenceContext
+    public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
 
-    void delete(Status status);
+    public StatusService(StatusRepository statusRepository) {
 
-    List<Status> getAll();
+    }
+
+    public Status getById(Long id) {
+        return em.find(Status.class, id);
+    }
 }
