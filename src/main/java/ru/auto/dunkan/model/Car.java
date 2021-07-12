@@ -1,11 +1,8 @@
 package ru.auto.dunkan.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
-@Data
 @Table(name = "cars")
 public class Car {
 
@@ -26,7 +23,7 @@ public class Car {
     @Column(name = "car_comments")
     private String comments;
 
-    @ManyToOne
-    @JoinColumn(name = "customer_id")
-    private Customer customerId;
+    //@ManyToOne
+    //@JoinColumn(name = "customer_id")
+    //private Customer customerId;
 }

@@ -2,10 +2,13 @@ package ru.auto.dunkan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import ru.auto.dunkan.model.Status;
 import ru.auto.dunkan.service.StatusService;
+
+import java.util.List;
 
 @Controller
 public class StatusController {
@@ -17,10 +20,16 @@ public class StatusController {
         this.statusService = statusService;
     }
 
-    @GetMapping("/status/all")
-    public String list(Model model) {
-        Status status = statusService.getById(0L);
-        model.addAttribute(status);
-        return "/status/list";
+    @GetMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
+    @RequestMapping("/")
+    public ModelAndView home() {
+        List<Status> statusList = statusService.listAll();
+        ModelAndView modelAndView = new ModelAndView("index");
+        modelAndView.addObject("statusList", statusList);
+        return modelAndView;
     }
 }

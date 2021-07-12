@@ -1,12 +1,9 @@
 package ru.auto.dunkan.model;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @Table(name = "orders")
 public class Order {
 

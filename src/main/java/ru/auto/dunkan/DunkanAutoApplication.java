@@ -1,4 +1,4 @@
-package ru.auto.dunkan.dunkanauto;
+package ru.auto.dunkan;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
