@@ -2,13 +2,18 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Заказы</title>
     <style type="text/css">
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
         th {
-            padding: 7px
+            font-family: 'Montserrat', sans-serif;
+            font-size: medium;
+            text-decoration: none;
+            text-align: left;
+            padding: 10px
         }
         a {
-            font-family: 'Roboto Thin', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-size: medium;
             text-decoration: none;
         }
@@ -19,17 +24,20 @@
         .shadowTable {
             box-shadow: 1px 1px 2px black, 0 0 5px black;
         }
+        .shadowLine {
+            box-shadow: 0px 0px 1px black;
+        }
     </style>
 </head>
 <body>
-<table style="border-collapse: collapse">
+<table class="shadowTable" style="border-collapse: collapse">
     <h1>Заказы:</h1>
-    <tr>
-        <th></th>
-        <th></th>
+    <tr class="shadowLine" style="background-color: bisque">
+        <th style="text-align: center">Наименование</th>
+        <th style="text-align: center">Статус</th>
     </tr>
-    <tr class="shadowTable" th:each="orders : ${orderList}">
-        <th style="text-align: left" th:bgcolor="${orders.getStatusId().getColor()}">
+    <tr class="shadowLine" th:each="orders : ${orderList}">
+        <th  th:bgcolor="${orders.getStatusId().getColor()}">
             <a class="shadowText" th:href="@{'order?id=' + ${orders.getId()}}" th:text="${orders.getName()}"/>
         </th>
         <th style="text-align: center" th:bgcolor="${orders.getStatusId().getColor()}">

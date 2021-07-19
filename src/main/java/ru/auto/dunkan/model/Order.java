@@ -14,7 +14,7 @@ public class Order {
     }
 
     public Order(long id, String name, Customer customerId, Car carId, long costOrigin, long costCustomer,
-                 Status statusId, LocalDateTime date_start) {
+                 Status statusId, LocalDateTime dateStart) {
         this.id = id;
         this.name = name;
         this.customerId = customerId;
@@ -22,7 +22,7 @@ public class Order {
         this.costOrigin = costOrigin;
         this.costCustomer = costCustomer;
         this.statusId = statusId;
-        this.date_start = date_start;
+        this.dateStart = dateStart;
     }
 
     @Override
@@ -35,9 +35,9 @@ public class Order {
                 ", costOrigin=" + costOrigin +
                 ", costCustomer=" + costCustomer +
                 ", statusId=" + statusId +
-                ", date_start=" + date_start +
-                ", date_end=" + date_end +
-                ", date_given_away=" + date_given_away +
+                ", date_start=" + dateStart +
+                ", date_end=" + dateEnd +
+                ", date_given_away=" + dateGivenAway +
                 '}';
     }
 
@@ -70,13 +70,16 @@ public class Order {
     private Status statusId;
 
     @Column(name = "order_date_start")
-    private LocalDateTime date_start;
+    private LocalDateTime dateStart;
 
     @Column(name = "order_date_end")
-    private LocalDateTime date_end;
+    private LocalDateTime dateEnd;
 
     @Column(name = "order_date_given_away")
-    private LocalDateTime date_given_away;
+    private LocalDateTime dateGivenAway;
+
+    @Column(name = "order_comments")
+    private String orderComments;
 
     // Getters
 
@@ -108,15 +111,19 @@ public class Order {
         return statusId;
     }
 
-    public LocalDateTime getDate_start() {
-        return date_start;
+    public LocalDateTime getDateStart() {
+        return dateStart;
     }
 
-    public LocalDateTime getDate_end() {
-        return date_end;
+    public LocalDateTime getDateEnd() {
+        return dateEnd;
     }
 
-    public LocalDateTime getDate_given_away() {
-        return date_given_away;
+    public LocalDateTime getDateGivenAway() {
+        return dateGivenAway;
+    }
+
+    public String getOrderComments() {
+        return orderComments;
     }
 }
