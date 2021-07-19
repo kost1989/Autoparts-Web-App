@@ -39,8 +39,10 @@ public class Status implements Serializable {
     @Column(name = "status_color")
     private String color;
 
-    // Getters
+    @ManyToOne
+    private Order orderId;
 
+    // Getters
 
     public long getId() {
         return id;
@@ -52,5 +54,9 @@ public class Status implements Serializable {
 
     public String getColor() {
         return color;
+    }
+
+    public Order getOrderId() {
+        return orderId;
     }
 }
