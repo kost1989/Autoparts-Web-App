@@ -14,16 +14,39 @@ public class OrderController {
 
     OrderService orderService;
 
+    String orderSortBy = " ";
+    String orderSortDir = " ";
+
     @Autowired
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
     }
 
-    @RequestMapping("/orders")
-    public ModelAndView getAllOrders() {
-        List<Order> orderList = orderService.listAll();
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    public ModelAndView getAllOrders(@RequestParam(value = "sortBy", required = false, defaultValue = " ") String orderSortBy, @RequestParam(value = "sortDir", required = false, defaultValue = " ") String orderSortDir) {
         ModelAndView modelAndView = new ModelAndView("orders");
+        this.orderSortDir = orderSortDir;
+        this.orderSortBy = orderSortBy;
+
+        boolean boolDirection = true;
+
+        if (orderSortDir.equals("up")) {
+            boolDirection = false;
+        }
+
+        List<Order> orderList = null;
+
+        switch (orderSortBy) {
+            case "status" :
+                orderList = orderService.listAllSortByStatus(boolDirection);
+                break;
+            default:
+                orderList = orderService.listAll();
+                break;
+        }
         modelAndView.addObject("orderList", orderList);
+        modelAndView.addObject("orderSortBy", orderSortBy);
+        modelAndView.addObject("orderSortDir", orderSortDir);
         return modelAndView;
     }
 
@@ -33,5 +56,11 @@ public class OrderController {
         ModelAndView modelAndView = new ModelAndView("orderbyid");
         modelAndView.addObject("orderbyid", order);
         return modelAndView;
+    }
+
+    // Other
+
+    public void switchOrderSortDir() {
+
     }
 }

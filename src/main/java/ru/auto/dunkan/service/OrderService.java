@@ -7,6 +7,7 @@ import ru.auto.dunkan.model.Car;
 import ru.auto.dunkan.model.Order;
 import ru.auto.dunkan.repo.OrderRepository;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -25,7 +26,20 @@ public class OrderService {
     }
 
     public List<Order> listAll() {
-        return orderRepository.findAll();
+        List<Order> orderList = orderRepository.findAll();
+        orderList.sort((o1, o2) -> Long.compare(o1.getId(), o2.getId()));
+        return orderList;
+    }
+
+    public List<Order> listAllSortByStatus(Boolean direction) {
+        List<Order> orderList = orderRepository.findAll();
+        if (direction) {
+            orderList.sort(Comparator.comparingLong(o -> o.getStatusId().getId()));
+        } else {
+            orderList.sort((o1, o2) -> Long.compare(o2.getStatusId().getId(), o1.getStatusId().getId()));
+        }
+
+        return orderList;
     }
 
     public Order get(Long id) {

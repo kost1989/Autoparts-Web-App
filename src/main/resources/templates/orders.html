@@ -33,8 +33,14 @@
 <table class="shadowTable" style="border-collapse: collapse">
     <h1>Заказы:</h1>
     <tr class="shadowLine" style="background-color: bisque">
-        <th style="text-align: center">Наименование</th>
-        <th style="text-align: center">Статус</th>
+        <th style="text-align: center">
+            Наименование
+        </th>
+        <th th:switch="${orderSortDir}" style="text-align: center">
+            <a th:case="up" th:href="@{'orders?sortBy=status&sortDir=down'}">Статус</a>
+            <a th:case="down" th:href="@{'orders?sortBy=status&sortDir=up'}">Статус</a>
+            <a th:case="*" th:href="@{'orders?sortBy=status&sortDir=up'}">Статус</a>
+        </th>
     </tr>
     <tr class="shadowLine" th:each="orders : ${orderList}">
         <th  th:bgcolor="${orders.getStatusId().getColor()}">
