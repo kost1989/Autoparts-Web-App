@@ -1,11 +1,37 @@
 package ru.auto.dunkan.model;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "customers")
 public class Customer {
+
+    //Standard from spring.io
+
+    protected Customer() {
+    }
+
+    public Customer(long id, String name, int extra, String phone) {
+        this.id = id;
+        this.name = name;
+        this.extra = extra;
+        this.phone = phone;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", extra=" + extra +
+                ", phone='" + phone + '\'' +
+                ", carList=" + carList +
+                '}';
+    }
+
+    //Table description
 
     @Id
     @Column(name = "customer_id")
@@ -21,6 +47,28 @@ public class Customer {
     @Column(name = "customer_phone")
     private String phone;
 
-    //@OneToMany(mappedBy = "car")
-    //private List<Car> carList;
+    @OneToMany
+    private List<Car> carList;
+
+    // Getters
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getExtra() {
+        return extra;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public List<Car> getCarList() {
+        return carList;
+    }
 }

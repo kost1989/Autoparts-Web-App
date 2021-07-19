@@ -6,6 +6,32 @@ import javax.persistence.*;
 @Table(name = "cars")
 public class Car {
 
+    //Standard from spring.io
+
+    protected Car() {
+    }
+
+    public Car(long id, String name, String vin, int year, String comments) {
+        this.id = id;
+        this.name = name;
+        this.vin = vin;
+        this.year = year;
+        this.comments = comments;
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", vin='" + vin + '\'' +
+                ", year=" + year +
+                ", comments='" + comments + '\'' +
+                '}';
+    }
+
+    //Table description
+
     @Id
     @Column(name = "car_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,7 +49,32 @@ public class Car {
     @Column(name = "car_comments")
     private String comments;
 
-    //@ManyToOne
-    //@JoinColumn(name = "customer_id")
-    //private Customer customerId;
+    @ManyToOne
+    private Customer customerId;
+
+    // Getters
+
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getVin() {
+        return vin;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public Customer getCustomerId() {
+        return customerId;
+    }
 }

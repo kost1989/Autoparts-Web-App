@@ -11,7 +11,7 @@ public class Status implements Serializable {
     protected Status() {
     }
 
-    public Status(long id, String name, Color color) {
+    public Status(long id, String name, String color) {
         this.id = id;
         this.name = name;
         this.color = color;
@@ -37,7 +37,20 @@ public class Status implements Serializable {
     private String name;
 
     @Column(name = "status_color")
-    private Color color;
+    private String color;
+
+    // Getters
 
 
+    public long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getColor() {
+        return color;
+    }
 }
