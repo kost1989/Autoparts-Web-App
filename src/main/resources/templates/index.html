@@ -1,10 +1,19 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru">
+
+<script src="/js/jquery-3.6.0.min.js"></script>
+<script src="/js/orders.js"></script>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Auto parts Web App</title>
 </head>
 <body>
-<a href="orders">Заказы</a>
+<div id="header">
+    <input id="clickMe" type="button" value="clickme" onclick="loadOrdersNotIssued();" />
+</div>
+
+<div id="orders">
+
+</div>
 </body>
 </html>

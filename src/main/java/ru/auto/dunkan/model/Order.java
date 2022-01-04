@@ -68,36 +68,46 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceOrder")
     private long id;
 
+    // Наименование заказа
     @Column(name = "order_name")
     private String name;
 
+    // Заказчик
     @ManyToOne
     @JoinColumn(name = "order_customer_id")
     private Customer customerId;
 
+    // Машина для которой заказывается деталь
     @ManyToOne
     @JoinColumn(name = "order_car_id")
     private Car carId;
 
+    // Изначальная стоимость
     @Column(name = "order_cost_origin")
     private long costOrigin;
 
+    // Стоимость для заказчика
     @Column(name = "order_cost_customer")
     private long costCustomer;
 
+    // Статус заказа
     @ManyToOne
     @JoinColumn(name = "order_status_id")
     private Status statusId;
 
+    // Дата заказа
     @Column(name = "order_date_start")
     private LocalDateTime dateStart;
 
+    // Дата прибытия заказа на склад
     @Column(name = "order_date_end")
     private LocalDateTime dateEnd;
 
+    // Дата выдачи заказа заказчику
     @Column(name = "order_date_given_away")
     private LocalDateTime dateGivenAway;
 
+    // Комментарии к заказу
     @Column(name = "order_comments")
     private String orderComments;
 
@@ -145,5 +155,69 @@ public class Order {
 
     public String getOrderComments() {
         return orderComments;
+    }
+
+    // Setters
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCustomerId(Customer customerId) {
+        this.customerId = customerId;
+    }
+
+    public void setCarId(Car carId) {
+        this.carId = carId;
+    }
+
+    public void setCostOrigin(long costOrigin) {
+        this.costOrigin = costOrigin;
+    }
+
+    public void setCostCustomer(long costCustomer) {
+        this.costCustomer = costCustomer;
+    }
+
+    public void setStatusId(Status statusId) {
+        this.statusId = statusId;
+    }
+
+    public void setDateStart(LocalDateTime dateStart) {
+        this.dateStart = dateStart;
+    }
+
+    public void setDateEnd(LocalDateTime dateEnd) {
+        this.dateEnd = dateEnd;
+    }
+
+    public void setDateGivenAway(LocalDateTime dateGivenAway) {
+        this.dateGivenAway = dateGivenAway;
+    }
+
+    public void setOrderComments(String orderComments) {
+        this.orderComments = orderComments;
+    }
+
+    public void setAllAvailableAttributes(String name,
+                                          Customer customerId,
+                                          Car carId,
+                                          Long costOrigin,
+                                          Long costCustomer,
+                                          Status statusId,
+                                          LocalDateTime dateStart,
+                                          LocalDateTime dateEnd,
+                                          LocalDateTime dateGivenAway,
+                                          String orderComments) {
+        this.name = name;
+        this.customerId = customerId;
+        this.carId = carId;
+        this.costOrigin = costOrigin;
+        this.costCustomer = costCustomer;
+        this.statusId = statusId;
+        this.dateStart = dateStart;
+        this.dateEnd = dateEnd;
+        this.dateGivenAway = dateGivenAway;
+        this.orderComments = orderComments;
     }
 }
