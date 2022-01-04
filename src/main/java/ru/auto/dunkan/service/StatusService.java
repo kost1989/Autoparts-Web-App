@@ -31,6 +31,10 @@ public class StatusService {
         return statusRepository.findById(id).get();
     }
 
+    public Status getByName(String name) {
+        return statusRepository.getStatusByName(name);
+    }
+
     public void delete(Long id) {
         statusRepository.deleteById(id);
     }

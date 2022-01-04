@@ -34,7 +34,8 @@ public class Car {
 
     @Id
     @Column(name = "car_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "jpaSequenceCar", sequenceName = "JPA_SEQUENCE_CAR", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceCar")
     private long id;
 
     @Column(name = "car_name")

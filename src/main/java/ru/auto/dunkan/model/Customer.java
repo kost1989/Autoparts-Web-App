@@ -20,6 +20,12 @@ public class Customer {
         this.phone = phone;
     }
 
+    public Customer(String name, int extra, String phone) {
+        this.name = name;
+        this.extra = extra;
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -35,7 +41,8 @@ public class Customer {
 
     @Id
     @Column(name = "customer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "jpaSequenceCustomer", sequenceName = "JPA_SEQUENCE_CUSTOMER", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceCustomer")
     private long id;
 
     @Column(name = "customer_name")

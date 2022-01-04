@@ -28,6 +28,10 @@ public class CarService {
         return carRepository.findAll();
     }
 
+    public List<Car> listByCustomer(Customer customer) {
+        return carRepository.findAllByCustomerId(customer);
+    }
+
     public Car get(Long id) {
         return carRepository.getById(id);
     }
