@@ -15,6 +15,13 @@ public class Status implements Serializable {
         this.id = id;
         this.name = name;
         this.color = color;
+        this.enabled = true;
+    }
+
+    public Status(String name, String color) {
+        this.name = name;
+        this.color = color;
+        this.enabled = true;
     }
 
     @Override
@@ -30,7 +37,8 @@ public class Status implements Serializable {
 
     @Id
     @Column(name = "status_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "jpaSequenceStatus", sequenceName = "JPA_SEQUENCE_Status", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceStatus")
     private long id;
 
     @Column(name = "status_name")
@@ -38,6 +46,9 @@ public class Status implements Serializable {
 
     @Column(name = "status_color")
     private String color;
+
+    @Column(name = "status_enabled")
+    private Boolean enabled;
 
     @ManyToOne
     private Order orderId;
@@ -56,7 +67,17 @@ public class Status implements Serializable {
         return color;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
     public Order getOrderId() {
         return orderId;
+    }
+
+    // Setters
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 }
