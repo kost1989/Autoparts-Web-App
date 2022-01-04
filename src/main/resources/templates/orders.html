@@ -18,8 +18,8 @@
             text-decoration: none;
         }
         .shadowText {
-            text-shadow: 1px 1px 2px black, 0 0 5px dimgrey; /* Параметры тени */
-            color: white; /* Белый цвет текста */
+            text-shadow: 1px 1px 2px black, 0 0 5px dimgrey;
+            color: white;
         }
         .shadowTable {
             box-shadow: 1px 1px 2px black, 0 0 5px black;
@@ -32,6 +32,9 @@
 <body>
 <table class="shadowTable" style="border-collapse: collapse">
     <h1>Заказы:</h1>
+    <a href="orderAdd">Создать заказ</a>
+
+
     <tr class="shadowLine" style="background-color: bisque">
         <th style="text-align: center">
             Наименование
@@ -42,6 +45,7 @@
             <a th:case="*" th:href="@{'orders?sortBy=status&sortDir=up'}">Статус</a>
         </th>
     </tr>
+
     <tr class="shadowLine" th:each="orders : ${orderList}">
         <th  th:bgcolor="${orders.getStatusId().getColor()}">
             <a class="shadowText" th:href="@{'order?id=' + ${orders.getId()}}" th:text="${orders.getName()}"/>

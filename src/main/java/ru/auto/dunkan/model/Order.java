@@ -14,7 +14,7 @@ public class Order {
     }
 
     public Order(long id, String name, Customer customerId, Car carId, long costOrigin, long costCustomer,
-                 Status statusId, LocalDateTime dateStart) {
+                 Status statusId, LocalDateTime dateStart, String comments) {
         this.id = id;
         this.name = name;
         this.customerId = customerId;
@@ -23,6 +23,25 @@ public class Order {
         this.costCustomer = costCustomer;
         this.statusId = statusId;
         this.dateStart = dateStart;
+        this.orderComments = comments;
+    }
+
+    public Order(String name, Customer customerId, Car carId, long costOrigin, long costCustomer,
+                 String comments, Status statusId, LocalDateTime dateStart) {
+        this.name = name;
+        this.customerId = customerId;
+        this.carId = carId;
+        this.costOrigin = costOrigin;
+        this.costCustomer = costCustomer;
+        this.orderComments = comments;
+        this.statusId = statusId;
+        this.dateStart = dateStart;
+    }
+
+    public Order(long id, Status statusId, LocalDateTime dateStart) {
+        this.id = id;
+        this.dateStart = dateStart;
+        this.statusId = statusId;
     }
 
     @Override
@@ -45,7 +64,8 @@ public class Order {
 
     @Id
     @Column(name = "order_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "jpaSequenceOrder", sequenceName = "JPA_SEQUENCE_ORDER", allocationSize = 1, initialValue = 1 )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceOrder")
     private long id;
 
     @Column(name = "order_name")
