@@ -1,17 +1,21 @@
+/**
+ * Загрузка незаконченных заказов
+ */
 function loadOrdersNotIssued() {
-    const requestURL = document.location.href + 'api/order/get/all_not_issued';
-
-    const request = new XMLHttpRequest();
-    request.open("POST", requestURL);
-    request.responseType = "json";
-    request.send();
-
-    request.onload = function() {
-        const dataDB = request.response;
-        tableCycle(dataDB);
-    };
+    loadToOrdersTable(document.location.href + 'api/order/get/all_not_issued');
 }
 
+/**
+ * Загрузка всех заказов, даже законченных
+ */
+function loadOrdersAll() {
+    loadToOrdersTable(document.location.href + 'api/order/get/all');
+}
+
+/**
+ * Генерация таблицы заказов
+ * @param jsonObj принятый с POST-запроса JSON
+ */
 function tableCycle(jsonObj) {
     var a = $('#orders').html();
 
@@ -32,4 +36,20 @@ function tableCycle(jsonObj) {
     output += "</table>";
 
     $('#orders').html(output);
+}
+
+/**
+ * Загрузка данных о заказах в таблицу
+ * @param requestURL ссылка запроса
+ */
+function loadToOrdersTable(requestURL) {
+    const request = new XMLHttpRequest();
+    request.open("POST", requestURL);
+    request.responseType = "json";
+    request.send();
+
+    request.onload = function() {
+        const dataDB = request.response;
+        tableCycle(dataDB);
+    };
 }
