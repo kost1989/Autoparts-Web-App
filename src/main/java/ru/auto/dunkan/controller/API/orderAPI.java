@@ -72,6 +72,12 @@ public class orderAPI {
         tempInnerJSON.put("car", order.getCarId().getName());
         tempInnerJSON.put("status", order.getStatusId().getName());
         tempInnerJSON.put("status_color", order.getStatusId().getColor());
+        tempInnerJSON.put("cost_origin", String.valueOf(order.getCostOrigin()));
+        tempInnerJSON.put("cost_customer", String.valueOf(order.getCostCustomer()));
+        tempInnerJSON.put("date_start", String.valueOf(order.getDateStart()));
+        tempInnerJSON.put("date_end", String.valueOf(order.getDateEnd()));
+        tempInnerJSON.put("date_given_away", String.valueOf(order.getDateGivenAway()));
+        tempInnerJSON.put("comments", order.getOrderComments());
         return tempInnerJSON;
     }
 
