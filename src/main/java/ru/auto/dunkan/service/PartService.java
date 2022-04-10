@@ -3,16 +3,16 @@ package ru.auto.dunkan.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.auto.dunkan.repo.CarRepository;
+import ru.auto.dunkan.repo.PartRepository;
 
 @Service
 @Transactional
-public class CarService {
+public class PartService {
 
-    private final CarRepository carRepository;
+    private final PartRepository partRepository;
 
     @Autowired
-    public CarService(CarRepository carRepository) {
-        this.carRepository = carRepository;
+    public PartService(PartRepository partRepository) {
+        this.partRepository = partRepository;
     }
 }

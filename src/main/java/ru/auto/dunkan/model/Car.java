@@ -1,81 +1,35 @@
 package ru.auto.dunkan.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "cars")
 public class Car {
-
-    //Standard from spring.io
-
-    protected Car() {
-    }
-
-    public Car(long id, String name, String vin, int year, String comments) {
-        this.id = id;
-        this.name = name;
-        this.vin = vin;
-        this.year = year;
-        this.comments = comments;
-    }
-
-    @Override
-    public String toString() {
-        return "Car{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", vin='" + vin + '\'' +
-                ", year=" + year +
-                ", comments='" + comments + '\'' +
-                '}';
-    }
-
-    //Table description
-
     @Id
-    @Column(name = "car_id")
-    @SequenceGenerator(name = "jpaSequenceCar", sequenceName = "JPA_SEQUENCE_CAR", allocationSize = 1, initialValue = 1 )
+    @Column(name = "id")
+    @SequenceGenerator(name = "jpaSequenceCar", sequenceName = "JPA_SEQUENCE_CAR", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "jpaSequenceCar")
-    private long id;
+    private Long id;
 
-    @Column(name = "car_name")
+    @Column(name = "name")
     private String name;
 
-    @Column(name = "car_vin")
+    @Column(name = "vin")
     private String vin;
 
-    @Column(name = "car_year")
-    private int year;
+    @Column(name = "year")
+    private Integer year;
 
-    @Column(name = "car_comments")
+    @Column(name = "comments")
     private String comments;
 
     @ManyToOne
-    private Customer customerId;
-
-    // Getters
-
-    public long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getVin() {
-        return vin;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public Customer getCustomerId() {
-        return customerId;
-    }
+    private Customer customer;
 }

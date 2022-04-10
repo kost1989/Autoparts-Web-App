@@ -12,30 +12,43 @@ import java.util.List;
 @Transactional
 public class StatusService {
 
-    StatusRepository statusRepository;
+    private final StatusRepository statusRepository;
 
     @Autowired
     public StatusService(StatusRepository statusRepository) {
         this.statusRepository = statusRepository;
     }
 
-    public void save(Status status) {
-        statusRepository.save(status);
+    public Status getById(Long id) {
+        return statusRepository.getById(id);
     }
 
-    public List<Status> listAll() {
-        return (List<Status>) statusRepository.findAll();
+    public List<Status> getListByFilter(Status status) {
+        if (status.getName() == null) {
+            return statusRepository.getListByFilter(status.getId(), null, status.getColor(), status.getEnabled());
+        } else {
+            return statusRepository.getListByFilter(status.getId(), status.getName().toLowerCase(), status.getColor(), status.getEnabled());
+        }
+
     }
 
-    public Status get(Long id) {
-        return statusRepository.findById(id).get();
+    public Status create(Status status) {
+        status.setEnabled(true);
+        if (statusRepository.getListByFilter(status.getId(), status.getName(), status.getColor(), status.getEnabled())
+                .isEmpty()) {
+            return statusRepository.saveAndFlush(status);
+        } else {
+            return statusRepository.getListByFilter(status.getId(), status.getName()
+                    , status.getColor(), status.getEnabled()).get(0);
+        }
     }
 
-    public Status getByName(String name) {
-        return statusRepository.getStatusByName(name);
+    public Status update(Status status) {
+        return statusRepository.saveAndFlush(status);
     }
 
-    public void delete(Long id) {
-        statusRepository.deleteById(id);
+    public Status delete(Status status) {
+        status.setEnabled(false);
+        return statusRepository.saveAndFlush(status);
     }
 }

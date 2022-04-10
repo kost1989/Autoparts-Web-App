@@ -1,11 +1,10 @@
 package ru.auto.dunkan.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -20,19 +19,30 @@ import javax.sql.DataSource;
 @EnableTransactionManagement
 public class ApplicationConfig {
 
+    @Value("${spring.datasource.driver-class-name:org.postgresql.Driver}")
+    private String driverClassName;
+
+    @Value("${spring.datasource.url}")
+    private String urlDB;
+
+    @Value("${spring.datasource.username:postgres}")
+    private String userName;
+
+    @Value("${spring.datasource.password:postgres}")
+    private String password;
+
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource driver = new DriverManagerDataSource();
-        driver.setDriverClassName("org.postgresql.Driver");
-        driver.setUrl("jdbc:postgresql://localhost:5432/dunkan-auto");
-        driver.setUsername("postgres");
-        driver.setPassword("qwe123");
+        driver.setDriverClassName(driverClassName);
+        driver.setUrl(urlDB);
+        driver.setUsername(userName);
+        driver.setPassword(password);
         return driver;
     }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
 
@@ -45,7 +55,6 @@ public class ApplicationConfig {
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-
         JpaTransactionManager txManager = new JpaTransactionManager();
         txManager.setEntityManagerFactory(entityManagerFactory);
         return txManager;
