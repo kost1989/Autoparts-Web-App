@@ -1,6 +1,3 @@
-**Autoparts Web App** (under development).
+**Autoparts Web App BackEnd Part** (under development).
 
-Web-приложение для обработки и спопровождения заказов автомобильных запчастей.
-
-Приложение использует следующий стек технологий:
-Spring MVC, Spring Data, Hibernate
+Web-приложение для обработки и сопровождения заказов автомобильных запчастей.
